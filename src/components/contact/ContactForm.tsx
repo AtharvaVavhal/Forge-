@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import HoverArrow from "@/components/HoverArrow";
 import {
   budgetRanges,
   emptyContactForm,
@@ -86,7 +87,7 @@ export default function ContactForm() {
 
   if (status === "success" && submitted) {
     return (
-      <div className="rounded-2xl border border-steel/20 bg-paper-elev p-8 md:p-10">
+      <div className="hero-anim rounded-2xl border border-steel/20 bg-paper-elev p-8 md:p-10">
         <p className="mono text-xs uppercase tracking-[0.2em] text-steel">
           Submitted
         </p>
@@ -161,9 +162,10 @@ export default function ContactForm() {
             setSubmitted(null);
             setStatus("idle");
           }}
-          className="font-display mt-8 text-sm font-semibold text-ink transition-colors hover:text-ember-deep"
+          className="group font-display mt-8 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors duration-[var(--duration-fast)] hover:text-ember-deep"
         >
-          Submit another project →
+          Submit another project
+          <HoverArrow />
         </button>
       </div>
     );
@@ -366,7 +368,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="font-display mt-8 rounded-full bg-ember-deep px-8 py-3.5 text-sm font-semibold text-paper transition-transform duration-150 hover:scale-[1.03] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+        className="font-display mt-8 rounded-full bg-ember-deep px-8 py-3.5 text-sm font-semibold text-paper transition-[transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-out-forge)] hover:scale-[1.03] hover:shadow-[0_10px_28px_-10px_rgba(224,130,74,0.55)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100 disabled:hover:shadow-none"
       >
         {status === "submitting" ? "Sending…" : "Start a Project"}
       </button>

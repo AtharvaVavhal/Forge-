@@ -13,16 +13,18 @@ export default function AboutPage() {
   return (
     <div className="bg-paper">
       <section className="mx-auto max-w-3xl px-6 py-20">
-        <Eyebrow>About</Eyebrow>
-        <h1 className="mt-3 font-display text-4xl font-extrabold text-ink md:text-5xl">
-          Who we are
-        </h1>
-        <p className="mt-6 text-lg leading-relaxed text-ink/80">
-          FORGE is a small, focused web and software development studio
-          based in Pune. We design and build websites, web applications and
-          business systems for companies that need software they can
-          actually run their operations on.
-        </p>
+        <Reveal variant="subtle">
+          <Eyebrow>About</Eyebrow>
+          <h1 className="mt-3 font-display text-4xl font-extrabold text-ink md:text-5xl">
+            Who we are
+          </h1>
+          <p className="mt-6 text-lg leading-relaxed text-ink/80">
+            FORGE is a small, focused web and software development studio
+            based in Pune. We design and build websites, web applications
+            and business systems for companies that need software they can
+            actually run their operations on.
+          </p>
+        </Reveal>
       </section>
 
       <section className="mx-auto max-w-3xl px-6 py-14">

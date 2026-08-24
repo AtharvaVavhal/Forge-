@@ -38,6 +38,153 @@
   }
 }
 
+/* ==================================================
+   Forge motion system
+   Three durations, two curves — see CLAUDE.md-adjacent
+   motion brief. Everything below composes from these.
+   ================================================== */
+:root {
+  --duration-fast: 180ms; /* micro-interactions: hover, tap feedback */
+  --duration-standard: 320ms; /* reveals, section transitions */
+  --duration-emphasis: 620ms; /* hero entrance, headline reveal, CTA */
+  --ease-out-forge: cubic-bezier(0.16, 1, 0.3, 1); /* strong deceleration */
+  --ease-in-out-forge: cubic-bezier(0.65, 0, 0.35, 1); /* symmetric, for morphs */
+}
+
+@keyframes forge-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes forge-enter-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes forge-word-in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes forge-corner-in {
+  from {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes forge-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pure-CSS entrance for above-the-fold content (Hero, Header) — no JS
+   dependency, so it plays even if hydration is slow or fails. Content is
+   already in the DOM/accessibility tree; only the visual reveal is animated. */
+.hero-anim {
+  animation: forge-enter var(--duration-emphasis) var(--ease-out-forge) both;
+}
+
+.hero-anim-fade {
+  animation: forge-enter-fade var(--duration-standard) var(--ease-out-forge)
+    both;
+}
+
+/* Masked word-by-word text reveal — see TextReveal.tsx. */
+.word-reveal {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.08em; /* keeps descenders (g, y, p) from clipping */
+  margin-bottom: -0.08em;
+}
+
+.word-reveal > span {
+  display: inline-block;
+  animation: forge-word-in var(--duration-emphasis) var(--ease-out-forge)
+    both;
+}
+
+/* Signature "precision lock" — corner marks snap into frame. See CornerMarks.tsx. */
+.corner-mark {
+  animation: forge-corner-in var(--duration-standard) var(--ease-out-forge)
+    both;
+}
+
+/* Signature detail — the eyebrow's leading tick draws in like a ruler mark.
+   Base state (scaleX(0)) only ever applies once JS has confirmed content
+   starts below the fold (see is-in below) — content-first, motion second. */
+.eyebrow-tick {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-standard) var(--ease-out-forge) 120ms;
+}
+
+.is-in .eyebrow-tick {
+  transform: scaleX(1);
+}
+
+/* Inside a pure-CSS `.hero-anim` context (Hero, CaseStudyMasthead) there's no
+   JS-driven state change to trigger the transition above, so the tick gets
+   its own keyframe instead — it still draws in, just via `animation` rather
+   than `transition`. */
+.hero-anim .eyebrow-tick {
+  animation: forge-tick-in var(--duration-standard) var(--ease-out-forge)
+    200ms both;
+}
+
+@keyframes forge-tick-in {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Route-change fade. See PageTransition.tsx. */
+.page-transition {
+  animation: forge-page-in 260ms var(--ease-out-forge) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
 body {
   background: var(--color-paper);
   color: var(--color-ink);

@@ -5,7 +5,7 @@ export default function Solution() {
   return (
     <section className="bg-paper">
       <div className="mx-auto max-w-4xl px-6 py-20">
-        <Reveal>
+        <Reveal variant="subtle">
           <SectionLabel number="04" label="Solution" />
           <p className="mt-4 font-display text-2xl font-bold text-ink md:text-3xl">
             A retention-and-operations platform built around one core

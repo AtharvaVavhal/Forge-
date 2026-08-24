@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -11,7 +12,7 @@ const navLinks = [
 export default function Footer() {
   return (
     <footer className="bg-ink text-paper">
-      <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
+      <Reveal variant="fade" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
         <div className="flex flex-col gap-12 border-b border-paper/10 pb-12 md:flex-row md:justify-between md:pb-14">
           <div>
             <p className="font-display text-2xl font-extrabold tracking-tight">
@@ -29,7 +30,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="font-display text-sm font-semibold text-paper/80 transition-colors hover:text-ember-bright"
+                className="font-display text-sm font-semibold text-paper/80 transition-colors duration-[var(--duration-fast)] hover:text-ember-bright"
               >
                 {link.label}
               </Link>
@@ -42,7 +43,7 @@ export default function Footer() {
               <span className="text-paper/40">(TODO: confirm email)</span>
             </p>
             <p className="mt-1.5">
-              +91 00000 00000{" "}
+              +91 86006 97250{" "}
               <span className="text-paper/40">(TODO: confirm phone)</span>
             </p>
           </div>
@@ -55,7 +56,7 @@ export default function Footer() {
             <span className="cursor-default">Terms</span>
           </div>
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

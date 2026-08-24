@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
+import HoverArrow from "@/components/HoverArrow";
 import { websiteTiers } from "@/lib/content/pricing";
 
 export default function PricingSection() {
   return (
     <section className="bg-paper">
       <div className="mx-auto max-w-6xl px-6 py-20">
-        <Reveal>
+        <Reveal variant="subtle">
           <Eyebrow number="07">Pricing</Eyebrow>
           <h2 className="mt-3 max-w-lg font-display text-3xl font-bold text-ink md:text-4xl">
             What websites start at
@@ -17,7 +18,7 @@ export default function PricingSection() {
             {websiteTiers.map((tier, index) => (
               <div
                 key={tier.name}
-                className={`flex items-center justify-between px-6 py-6 transition-colors hover:bg-ink/[0.02] ${
+                className={`flex items-center justify-between px-6 py-6 transition-colors duration-[var(--duration-standard)] hover:bg-ink/[0.02] ${
                   index !== 0 ? "border-t border-steel/15" : ""
                 }`}
               >
@@ -39,15 +40,10 @@ export default function PricingSection() {
 
           <Link
             href="/pricing"
-            className="font-display group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors hover:text-ember-deep"
+            className="font-display group mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors duration-[var(--duration-fast)] hover:text-ember-deep"
           >
             See full pricing
-            <span
-              className="transition-transform duration-150 group-hover:translate-x-0.5"
-              aria-hidden
-            >
-              →
-            </span>
+            <HoverArrow />
           </Link>
         </Reveal>
       </div>

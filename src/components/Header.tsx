@@ -46,7 +46,7 @@ export default function Header() {
   const mobileNav = (
     <div
       id="mobile-nav"
-      className={`fixed inset-0 z-40 bg-ink pt-[73px] text-paper transition-[opacity,visibility] duration-200 md:hidden ${
+      className={`fixed inset-0 z-40 bg-ink pt-[73px] text-paper transition-[opacity,visibility] duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] md:hidden ${
         open ? "visible opacity-100" : "invisible opacity-0"
       }`}
     >
@@ -55,14 +55,14 @@ export default function Header() {
           {navLinks.map((link, index) => (
             <li
               key={link.href}
-              className={`border-b border-paper/10 transition-[opacity,transform] duration-300 ${
+              className={`border-b border-paper/10 transition-[opacity,transform] duration-[var(--duration-emphasis)] ease-[var(--ease-out-forge)] ${
                 open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
               }`}
               style={{ transitionDelay: open ? `${index * 40}ms` : "0ms" }}
             >
               <Link
                 href={link.href}
-                className="font-display block py-4 text-2xl font-bold tracking-tight transition-colors hover:text-ember-bright"
+                className="font-display block py-4 text-2xl font-bold tracking-tight transition-colors duration-[var(--duration-fast)] hover:text-ember-bright"
               >
                 {link.label}
               </Link>
@@ -72,7 +72,7 @@ export default function Header() {
 
         <Link
           href="/contact"
-          className="font-display rounded-full bg-ember-deep px-6 py-4 text-center text-base font-semibold text-paper"
+          className="font-display rounded-full bg-ember-deep px-6 py-4 text-center text-base font-semibold text-paper transition-transform duration-[var(--duration-fast)] ease-[var(--ease-out-forge)] active:scale-[0.98]"
         >
           Start a Project
         </Link>
@@ -81,7 +81,7 @@ export default function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-50 border-b border-steel/20 bg-paper/95 backdrop-blur">
+    <header className="hero-anim-fade sticky top-0 z-50 border-b border-steel/20 bg-paper/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <Link
           href="/"
@@ -98,13 +98,13 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 aria-current={active ? "page" : undefined}
-                className={`font-display group relative text-sm font-semibold transition-colors ${
+                className={`font-display group relative text-sm font-semibold transition-colors duration-[var(--duration-fast)] ${
                   active ? "text-ink" : "text-ink/80 hover:text-ink"
                 }`}
               >
                 {link.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px bg-ember-deep transition-all duration-200 ${
+                  className={`absolute -bottom-1 left-0 h-px bg-ember-deep transition-all duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] ${
                     active ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                   aria-hidden
@@ -117,7 +117,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
-            className="font-display hidden rounded-full bg-ember-deep px-5 py-2.5 text-sm font-semibold text-paper transition-transform duration-150 hover:scale-[1.03] active:scale-[0.98] sm:inline-block"
+            className="font-display hidden rounded-full bg-ember-deep px-5 py-2.5 text-sm font-semibold text-paper transition-[transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-out-forge)] hover:scale-[1.03] hover:shadow-[0_8px_20px_-8px_rgba(154,74,28,0.45)] active:scale-[0.98] sm:inline-block"
           >
             Start a Project
           </Link>
@@ -132,17 +132,17 @@ export default function Header() {
           >
             <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
             <span
-              className={`absolute h-0.5 w-5 bg-ink transition-transform duration-200 ${
+              className={`absolute h-0.5 w-5 bg-ink transition-transform duration-[var(--duration-standard)] ease-[var(--ease-in-out-forge)] ${
                 open ? "rotate-45" : "-translate-y-1.5"
               }`}
             />
             <span
-              className={`absolute h-0.5 w-5 bg-ink transition-opacity duration-150 ${
+              className={`absolute h-0.5 w-5 bg-ink transition-opacity duration-[var(--duration-fast)] ${
                 open ? "opacity-0" : "opacity-100"
               }`}
             />
             <span
-              className={`absolute h-0.5 w-5 bg-ink transition-transform duration-200 ${
+              className={`absolute h-0.5 w-5 bg-ink transition-transform duration-[var(--duration-standard)] ease-[var(--ease-in-out-forge)] ${
                 open ? "-rotate-45" : "translate-y-1.5"
               }`}
             />

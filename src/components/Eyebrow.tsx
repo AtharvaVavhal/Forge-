@@ -13,7 +13,7 @@ export default function Eyebrow({
     <p
       className={`mono flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] ${color}`}
     >
-      <span className="h-px w-5 bg-current" aria-hidden />
+      <span className="eyebrow-tick h-px w-5 bg-current" aria-hidden />
       {number && <span className="tabular-nums">{number}</span>}
       {children}
     </p>

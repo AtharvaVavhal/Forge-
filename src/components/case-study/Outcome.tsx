@@ -5,7 +5,7 @@ export default function Outcome() {
   return (
     <section className="bg-paper">
       <div className="mx-auto max-w-4xl px-6 py-20">
-        <Reveal>
+        <Reveal variant="subtle">
           <SectionLabel number="09" label="Outcome" />
           <h2 className="mt-4 font-display text-2xl font-bold text-ink md:text-3xl">
             What this solves

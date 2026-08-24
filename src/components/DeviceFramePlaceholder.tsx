@@ -9,7 +9,7 @@ export default function DeviceFramePlaceholder({
 }) {
   return (
     <div
-      className={`group overflow-hidden rounded-2xl border border-steel/40 bg-ink shadow-xl transition-shadow duration-300 hover:shadow-2xl ${className}`}
+      className={`group overflow-hidden rounded-2xl border border-steel/40 bg-ink shadow-xl transition-shadow duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] hover:shadow-2xl ${className}`}
     >
       <div className="flex items-center gap-1.5 border-b border-paper/10 px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-paper/15" />
@@ -17,7 +17,7 @@ export default function DeviceFramePlaceholder({
         <span className="h-2.5 w-2.5 rounded-full bg-paper/15" />
       </div>
       <div
-        className="relative m-3 flex aspect-[4/3] flex-col items-center justify-center gap-2 overflow-hidden rounded-lg border border-dashed border-paper/15 px-6 text-center"
+        className="relative m-3 flex aspect-[4/3] flex-col items-center justify-center gap-2 overflow-hidden rounded-lg border border-dashed border-paper/15 px-6 text-center transition-transform duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] group-hover:scale-[1.02]"
         style={{
           backgroundImage:
             "linear-gradient(rgba(242,236,223,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(242,236,223,0.05) 1px, transparent 1px)",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
+import HoverArrow from "@/components/HoverArrow";
 import { services } from "@/lib/content/services";
 
 export const metadata: Metadata = {
@@ -14,15 +15,17 @@ export default function ServicesPage() {
   return (
     <div className="bg-paper">
       <section className="mx-auto max-w-4xl px-6 py-20">
-        <Eyebrow>Services</Eyebrow>
-        <h1 className="mt-3 font-display text-4xl font-extrabold text-ink md:text-5xl">
-          What we do
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
-          Six categories, no jargon. If your business needs something that
-          doesn&apos;t fit neatly into one, tell us what you&apos;re trying
-          to solve and we&apos;ll work out where it belongs.
-        </p>
+        <Reveal variant="subtle">
+          <Eyebrow>Services</Eyebrow>
+          <h1 className="mt-3 font-display text-4xl font-extrabold text-ink md:text-5xl">
+            What we do
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/80">
+            Six categories, no jargon. If your business needs something that
+            doesn&apos;t fit neatly into one, tell us what you&apos;re trying
+            to solve and we&apos;ll work out where it belongs.
+          </p>
+        </Reveal>
       </section>
 
       <div className="mx-auto max-w-4xl divide-y divide-steel/20 px-6 pb-24">
@@ -84,15 +87,10 @@ export default function ServicesPage() {
               {service.homeCta && (
                 <Link
                   href="/contact"
-                  className="font-display group mt-8 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors hover:text-ember-deep"
+                  className="font-display group mt-8 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors duration-[var(--duration-fast)] hover:text-ember-deep"
                 >
                   {service.homeCta}
-                  <span
-                    className="transition-transform duration-150 group-hover:translate-x-0.5"
-                    aria-hidden
-                  >
-                    →
-                  </span>
+                  <HoverArrow />
                 </Link>
               )}
             </Reveal>

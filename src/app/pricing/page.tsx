@@ -14,14 +14,16 @@ export default function PricingPage() {
   return (
     <div className="bg-paper">
       <section className="mx-auto max-w-3xl px-6 py-20">
-        <Eyebrow>Pricing</Eyebrow>
-        <h1 className="mt-3 font-display text-4xl font-extrabold text-ink md:text-5xl">
-          What things cost
-        </h1>
-        <p className="mt-6 text-lg leading-relaxed text-ink/80">
-          Every project is scoped and priced individually. These ranges are
-          a starting point, not a menu.
-        </p>
+        <Reveal variant="subtle">
+          <Eyebrow>Pricing</Eyebrow>
+          <h1 className="mt-3 font-display text-4xl font-extrabold text-ink md:text-5xl">
+            What things cost
+          </h1>
+          <p className="mt-6 text-lg leading-relaxed text-ink/80">
+            Every project is scoped and priced individually. These ranges
+            are a starting point, not a menu.
+          </p>
+        </Reveal>
       </section>
 
       <section className="mx-auto max-w-3xl px-6 py-10">
@@ -33,7 +35,7 @@ export default function PricingPage() {
             {websiteTiers.map((tier, index) => (
               <div
                 key={tier.name}
-                className={`flex items-center justify-between px-6 py-5 transition-colors hover:bg-ink/[0.02] ${
+                className={`flex items-center justify-between px-6 py-5 transition-colors duration-[var(--duration-standard)] hover:bg-ink/[0.02] ${
                   index !== 0 ? "border-t border-steel/15" : ""
                 }`}
               >
@@ -87,7 +89,7 @@ export default function PricingPage() {
 
         <Link
           href="/contact"
-          className="font-display mt-8 inline-flex rounded-full bg-ember-deep px-6 py-3 text-sm font-semibold text-paper transition-transform duration-150 hover:scale-[1.03] active:scale-[0.98]"
+          className="font-display mt-8 inline-flex rounded-full bg-ember-deep px-6 py-3 text-sm font-semibold text-paper transition-[transform,box-shadow] duration-[var(--duration-fast)] ease-[var(--ease-out-forge)] hover:scale-[1.03] hover:shadow-[0_8px_20px_-8px_rgba(154,74,28,0.45)] active:scale-[0.98]"
         >
           Start a Project
         </Link>

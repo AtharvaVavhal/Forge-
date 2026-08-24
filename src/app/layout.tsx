@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, Source_Serif_4, IBM_Plex_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -61,7 +62,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </a>
         <Header />
         <main id="main-content" className="flex-1">
-          {children}
+          <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
       </body>
