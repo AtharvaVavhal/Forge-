@@ -161,7 +161,7 @@ export default function ContactForm() {
             setSubmitted(null);
             setStatus("idle");
           }}
-          className="font-display mt-8 text-sm font-semibold text-ink transition-colors hover:text-ember"
+          className="font-display mt-8 text-sm font-semibold text-ink transition-colors hover:text-ember-deep"
         >
           Submit another project →
         </button>
@@ -190,7 +190,7 @@ export default function ContactForm() {
             aria-describedby={errors.name ? "name-error" : undefined}
           />
           {errors.name && (
-            <p id="name-error" className="mt-2 text-sm text-ember">
+            <p id="name-error" className="mt-2 text-sm text-ember-deep">
               {errors.name}
             </p>
           )}
@@ -214,7 +214,7 @@ export default function ContactForm() {
             }
           />
           {errors.businessName && (
-            <p id="businessName-error" className="mt-2 text-sm text-ember">
+            <p id="businessName-error" className="mt-2 text-sm text-ember-deep">
               {errors.businessName}
             </p>
           )}
@@ -234,7 +234,7 @@ export default function ContactForm() {
             aria-describedby={errors.email ? "email-error" : undefined}
           />
           {errors.email && (
-            <p id="email-error" className="mt-2 text-sm text-ember">
+            <p id="email-error" className="mt-2 text-sm text-ember-deep">
               {errors.email}
             </p>
           )}
@@ -254,7 +254,7 @@ export default function ContactForm() {
             aria-describedby={errors.phone ? "phone-error" : undefined}
           />
           {errors.phone && (
-            <p id="phone-error" className="mt-2 text-sm text-ember">
+            <p id="phone-error" className="mt-2 text-sm text-ember-deep">
               {errors.phone}
             </p>
           )}
@@ -285,7 +285,7 @@ export default function ContactForm() {
           ))}
         </select>
         {errors.projectType && (
-          <p id="projectType-error" className="mt-2 text-sm text-ember">
+          <p id="projectType-error" className="mt-2 text-sm text-ember-deep">
             {errors.projectType}
           </p>
         )}
@@ -310,7 +310,7 @@ export default function ContactForm() {
           }
         />
         {errors.description && (
-          <p id="description-error" className="mt-2 text-sm text-ember">
+          <p id="description-error" className="mt-2 text-sm text-ember-deep">
             {errors.description}
           </p>
         )}
@@ -336,7 +336,7 @@ export default function ContactForm() {
           ))}
         </select>
         {errors.budget && (
-          <p id="budget-error" className="mt-2 text-sm text-ember">
+          <p id="budget-error" className="mt-2 text-sm text-ember-deep">
             {errors.budget}
           </p>
         )}
@@ -360,13 +360,13 @@ export default function ContactForm() {
       </div>
 
       {status === "error" && submitError && (
-        <p className="mt-6 text-sm text-ember">{submitError}</p>
+        <p className="mt-6 text-sm text-ember-deep">{submitError}</p>
       )}
 
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="font-display mt-8 rounded-full bg-ember px-8 py-3.5 text-sm font-semibold text-paper transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+        className="font-display mt-8 rounded-full bg-ember-deep px-8 py-3.5 text-sm font-semibold text-paper transition-transform duration-150 hover:scale-[1.03] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Start a Project"}
       </button>

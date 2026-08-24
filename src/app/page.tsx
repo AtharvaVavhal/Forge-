@@ -1,5 +1,4 @@
 import Hero from "@/components/home/Hero";
-import WhatWeBuild from "@/components/home/WhatWeBuild";
 import FeaturedWork from "@/components/home/FeaturedWork";
 import ServicesGrid from "@/components/home/ServicesGrid";
 import WhoWeBuildFor from "@/components/home/WhoWeBuildFor";
@@ -13,7 +12,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <WhatWeBuild />
       <FeaturedWork />
       <ServicesGrid />
       <WhoWeBuildFor />

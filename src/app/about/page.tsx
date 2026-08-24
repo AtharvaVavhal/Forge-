@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Eyebrow from "@/components/Eyebrow";
+import Reveal from "@/components/Reveal";
 import { processSteps } from "@/lib/content/process";
 
 export const metadata: Metadata = {
@@ -60,19 +61,21 @@ export default function AboutPage() {
         </h2>
         <div className="mt-8 space-y-8">
           {processSteps.map((step, index) => (
-            <div key={step.label} className="flex gap-5">
-              <span className="mono shrink-0 pt-1 text-sm text-steel">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <div>
-                <h3 className="font-display text-lg font-bold text-ink">
-                  {step.label}
-                </h3>
-                <p className="mt-1.5 text-base leading-relaxed text-ink/80">
-                  {step.detail}
-                </p>
+            <Reveal key={step.label} delay={index * 40}>
+              <div className="flex gap-5 border-t border-steel/15 pt-6 first:border-t-0 first:pt-0">
+                <span className="mono shrink-0 pt-1 text-sm text-steel">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="font-display text-lg font-bold text-ink">
+                    {step.label}
+                  </h3>
+                  <p className="mt-1.5 text-base leading-relaxed text-ink/80">
+                    {step.detail}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>

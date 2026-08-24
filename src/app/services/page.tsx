@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
+import Reveal from "@/components/Reveal";
 import { services } from "@/lib/content/services";
 
 export const metadata: Metadata = {
@@ -25,65 +26,76 @@ export default function ServicesPage() {
       </section>
 
       <div className="mx-auto max-w-4xl divide-y divide-steel/20 px-6 pb-24">
-        {services.map((service) => (
+        {services.map((service, index) => (
           <section
             key={service.slug}
             id={service.slug}
             className="scroll-mt-24 py-14"
           >
-            <h2 className="font-display text-2xl font-bold text-ink md:text-3xl">
-              {service.name}
-            </h2>
+            <Reveal>
+              <span className="mono text-xs text-steel">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h2 className="mt-2 font-display text-2xl font-bold text-ink md:text-3xl">
+                {service.name}
+              </h2>
 
-            <p className="mt-4 text-base leading-relaxed text-ink/80">
-              {service.what}
-            </p>
+              <p className="mt-4 text-base leading-relaxed text-ink/80">
+                {service.what}
+              </p>
 
-            <div className="mt-6">
-              <p className="mono text-xs uppercase tracking-[0.2em] text-steel">
-                Who needs it
-              </p>
-              <p className="mt-2 text-base leading-relaxed text-ink/80">
-                {service.who}
-              </p>
-            </div>
+              <div className="mt-6">
+                <p className="mono text-xs uppercase tracking-[0.2em] text-steel">
+                  Who needs it
+                </p>
+                <p className="mt-2 text-base leading-relaxed text-ink/80">
+                  {service.who}
+                </p>
+              </div>
 
-            <div className="mt-6">
-              <p className="mono text-xs uppercase tracking-[0.2em] text-steel">
-                Typical use cases
-              </p>
-              <ul className="mt-2 space-y-1.5">
-                {service.useCases.map((useCase) => (
-                  <li
-                    key={useCase}
-                    className="flex items-baseline gap-2 text-base leading-relaxed text-ink/80"
+              <div className="mt-6">
+                <p className="mono text-xs uppercase tracking-[0.2em] text-steel">
+                  Typical use cases
+                </p>
+                <ul className="mt-2 space-y-1.5">
+                  {service.useCases.map((useCase) => (
+                    <li
+                      key={useCase}
+                      className="flex items-baseline gap-2 text-base leading-relaxed text-ink/80"
+                    >
+                      <span className="text-steel" aria-hidden>
+                        —
+                      </span>
+                      {useCase}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="mt-6">
+                <p className="mono text-xs uppercase tracking-[0.2em] text-steel">
+                  What FORGE delivers
+                </p>
+                <p className="mt-2 text-base leading-relaxed text-ink/80">
+                  {service.deliverables}
+                </p>
+              </div>
+
+              {service.homeCta && (
+                <Link
+                  href="/contact"
+                  className="font-display group mt-8 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors hover:text-ember-deep"
+                >
+                  {service.homeCta}
+                  <span
+                    className="transition-transform duration-150 group-hover:translate-x-0.5"
+                    aria-hidden
                   >
-                    <span className="text-steel" aria-hidden>
-                      —
-                    </span>
-                    {useCase}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="mt-6">
-              <p className="mono text-xs uppercase tracking-[0.2em] text-steel">
-                What FORGE delivers
-              </p>
-              <p className="mt-2 text-base leading-relaxed text-ink/80">
-                {service.deliverables}
-              </p>
-            </div>
-
-            {service.homeCta && (
-              <Link
-                href="/contact"
-                className="font-display mt-8 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors hover:text-ember"
-              >
-                {service.homeCta} <span aria-hidden>→</span>
-              </Link>
-            )}
+                    →
+                  </span>
+                </Link>
+              )}
+            </Reveal>
           </section>
         ))}
       </div>

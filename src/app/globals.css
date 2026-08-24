@@ -7,6 +7,14 @@
   --color-ember: #b85a22;
   --color-ember-soft: #e8dcc8;
   --color-steel: #6b6459;
+
+  /* AA-contrast ember variants — see CLAUDE.md: "Contrast-check ember-on-paper
+     for WCAG AA... use a darkened ember variant for small text if the base
+     value fails." Base ember on paper measures ~4.05:1 (fails 4.5:1 for
+     normal text); ember on ink measures ~3.96:1 (also fails). These two
+     variants are for text/fills below the "large text" threshold. */
+  --color-ember-deep: #9a4a1c; /* ember text/fills on paper + paper-elev — 5.4:1 */
+  --color-ember-bright: #e0824a; /* ember text on ink — 6.5:1 */
 }
 
 @theme inline {
@@ -16,10 +24,18 @@
   --color-ember: var(--color-ember);
   --color-ember-soft: var(--color-ember-soft);
   --color-steel: var(--color-steel);
+  --color-ember-deep: var(--color-ember-deep);
+  --color-ember-bright: var(--color-ember-bright);
 
   --font-display: var(--font-archivo), sans-serif;
   --font-body: var(--font-source-serif), serif;
   --font-mono: var(--font-ibm-plex-mono), monospace;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
@@ -39,4 +55,34 @@ h6 {
 
 .mono {
   font-family: var(--font-mono);
+}
+
+::selection {
+  background: var(--color-ember-soft);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ember-deep);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  background: var(--color-ember-deep);
+  color: var(--color-paper);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-archivo), sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 0;
 }

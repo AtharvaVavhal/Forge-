@@ -12,7 +12,7 @@ export default function CaseStudyCta() {
           </h2>
           <Link
             href="/contact"
-            className="font-display shrink-0 rounded-full bg-ember px-8 py-3.5 text-sm font-semibold text-paper transition-opacity hover:opacity-90"
+            className="font-display shrink-0 rounded-full bg-ember-deep px-8 py-3.5 text-sm font-semibold text-paper transition-transform duration-150 hover:scale-[1.03] active:scale-[0.98]"
           >
             Start a Project
           </Link>

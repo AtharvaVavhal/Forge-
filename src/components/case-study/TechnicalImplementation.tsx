@@ -1,9 +1,11 @@
 import SectionLabel from "./SectionLabel";
+import Reveal from "@/components/Reveal";
 
 export default function TechnicalImplementation() {
   return (
     <section className="bg-paper">
       <div className="mx-auto max-w-4xl px-6 py-20">
+        <Reveal>
         <SectionLabel number="08" label="Technical Implementation" />
         <h2 className="mt-4 font-display text-2xl font-bold text-ink md:text-3xl">
           How it works
@@ -45,6 +47,7 @@ export default function TechnicalImplementation() {
             layer.
           </p>
         </div>
+        </Reveal>
       </div>
     </section>
   );
