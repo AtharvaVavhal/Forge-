@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
+import Logo from "@/components/Logo";
 
 const navLinks = [
   { href: "/work", label: "Work" },
@@ -83,11 +84,8 @@ export default function Header() {
   return (
     <header className="hero-anim-fade sticky top-0 z-50 border-b border-steel/20 bg-paper/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <Link
-          href="/"
-          className="font-display text-xl font-extrabold tracking-tight text-ink"
-        >
-          FORGE
+        <Link href="/" aria-label="FORGE — home" className="text-ink">
+          <Logo className="h-6 w-auto md:h-7" />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

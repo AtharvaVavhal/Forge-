@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import Logo from "@/components/Logo";
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -15,9 +16,7 @@ export default function Footer() {
       <Reveal variant="fade" className="mx-auto max-w-6xl px-6 py-16 md:py-20">
         <div className="flex flex-col gap-12 border-b border-paper/10 pb-12 md:flex-row md:justify-between md:pb-14">
           <div>
-            <p className="font-display text-2xl font-extrabold tracking-tight">
-              FORGE
-            </p>
+            <Logo className="h-7 w-auto text-paper" />
             <p className="mt-3 text-sm leading-relaxed text-paper/70">
               Web &amp; Software Development
               <br />

@@ -14,12 +14,16 @@ export default function Icon() {
           alignItems: "center",
           justifyContent: "center",
           background: "#17140F",
-          color: "#B85A22",
-          fontSize: 20,
-          fontWeight: 800,
+          padding: 5,
         }}
       >
-        F
+        <svg viewBox="0 0 120 120" width="100%" height="100%">
+          <path
+            d="M 0,0 L 120,0 L 90,30 L 30,30 L 30,50 L 80,50 L 60,70 L 30,70 L 30,100 L 0,70 Z"
+            fill="#F3EFE7"
+          />
+          <path d="M 0,90 L 30,120 L 0,120 Z" fill="#F3EFE7" />
+        </svg>
       </div>
     ),
     { ...size }
