@@ -38,7 +38,7 @@ export default function Footer() {
 
           <div className="mono text-sm text-paper/70">
             <p>
-              hello@forge.studio{" "}
+              hello@forgebuilds.in{" "}
               <span className="text-paper/40">(TODO: confirm email)</span>
             </p>
             <p className="mt-1.5">
