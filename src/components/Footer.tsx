@@ -41,8 +41,8 @@ export default function Footer() {
               hello@forgebuilds.in{" "}
               <span className="text-paper/40">(TODO: confirm the email)</span>
             </p>
-            <p className="mt-1.5">
-              +91 86006 97250{" "}
+            <p className="mt-1.5">  
+              +91 74992 74587{" "}
               <span className="text-paper/40">(TODO: confirm phone)</span>
             </p>
           </div>
