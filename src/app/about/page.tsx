@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
+import Team from "@/components/about/Team";
 import { processSteps } from "@/lib/content/process";
 
 export const metadata: Metadata = {
@@ -56,6 +57,8 @@ export default function AboutPage() {
           because our work isn&apos;t finished the day it goes live.
         </p>
       </section>
+
+      <Team />
 
       <section className="mx-auto max-w-3xl px-6 py-14">
         <h2 className="font-display text-2xl font-bold text-ink md:text-3xl">
