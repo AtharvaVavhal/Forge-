@@ -7,15 +7,15 @@ export default function FinalCta() {
     <section className="bg-ink text-paper">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 py-24 text-center md:py-32">
         <Reveal variant="emphasis" className="flex flex-col items-center gap-6">
-          <Eyebrow tone="paper" number="09">
+          <Eyebrow tone="paper" number="08">
             Start a Project
           </Eyebrow>
           <h2 className="font-display max-w-2xl text-4xl font-extrabold leading-[1.08] tracking-tight md:text-5xl">
-            Websites and software your business actually runs on.
+            Have something worth building?
           </h2>
           <p className="max-w-xl text-base text-paper/70">
-            Tell us what your business needs, and we&apos;ll scope it
-            properly before we build anything.
+            Tell us where the work is getting stuck. We&apos;ll help define the
+            right thing to build before development begins.
           </p>
           <Link
             href="/contact"

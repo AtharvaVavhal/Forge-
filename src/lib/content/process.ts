@@ -35,7 +35,7 @@ export const processSteps: ProcessStep[] = [
       "We handle deployment, domain, hosting and the technical details of going live. This is what keeps launch day from being the riskiest day of the project.",
   },
   {
-    label: "Support",
+    label: "Improve",
     detail:
       "We stay involved after launch with an agreed support plan, so issues get fixed and the system keeps working as your business changes. This is what stops the software from being abandoned the moment it ships.",
   },

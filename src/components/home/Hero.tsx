@@ -1,13 +1,12 @@
 import Link from "next/link";
-import DeviceFramePlaceholder from "@/components/DeviceFramePlaceholder";
 import Eyebrow from "@/components/Eyebrow";
-import CornerMarks from "@/components/CornerMarks";
 import TextReveal from "@/components/TextReveal";
 import HoverArrow from "@/components/HoverArrow";
+import ForgeProductShowcase from "@/components/home/ForgeProductShowcase";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-ink text-paper">
+    <section className="forge-hero relative overflow-hidden bg-ink text-paper">
       <div
         className="pointer-events-none absolute inset-0 opacity-[0.05]"
         style={{
@@ -19,25 +18,24 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-16 md:pb-28 md:pt-24">
-        <div className="hero-anim" style={{ animationDelay: "0ms" }}>
-          <Eyebrow tone="paper" number="01">
-            Web &amp; Software Development Studio
-          </Eyebrow>
-        </div>
+      <div className="relative mx-auto max-w-6xl px-6 pb-20 pt-14 md:pb-28 md:pt-20">
+        <div className="grid gap-14 lg:grid-cols-[minmax(0,0.86fr)_minmax(30rem,1.14fr)] lg:items-end lg:gap-10">
+          <div>
+            <div className="hero-anim" style={{ animationDelay: "0ms" }}>
+              <Eyebrow tone="paper" number="01">
+                Web &amp; Software Development Studio
+              </Eyebrow>
+            </div>
 
-        <TextReveal
-          as="h1"
-          text="Websites and software your business actually runs on."
-          startDelay={120}
-          wordDelay={45}
-          className="mt-6 block max-w-4xl font-display text-[2.5rem] font-extrabold leading-[1.05] tracking-tight sm:text-6xl md:text-[4.25rem] lg:text-[4.75rem]"
-        />
-
-        <div className="mt-14 grid gap-12 md:grid-cols-12 md:items-end">
-          <div className="md:col-span-6 lg:col-span-5">
+            <TextReveal
+              as="h1"
+              text="Websites and software your business actually runs on."
+              startDelay={120}
+              wordDelay={45}
+              className="mt-6 block max-w-3xl font-display text-[2.7rem] font-extrabold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.55rem]"
+            />
             <p
-              className="hero-anim max-w-md text-lg leading-relaxed text-paper/75"
+              className="hero-anim mt-8 max-w-md text-lg leading-relaxed text-paper/75"
               style={{ animationDelay: "420ms" }}
             >
               FORGE is a web and software development studio. We design and
@@ -65,20 +63,11 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="md:col-span-6 md:justify-self-end lg:col-span-7">
-            <div
-              className="hero-anim max-w-sm md:ml-auto"
-              style={{ animationDelay: "620ms" }}
-            >
-              <p className="mono flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-paper/40">
-                Flagship Build
-                <span className="h-px flex-1 bg-paper/15" aria-hidden />
-              </p>
-              <div className="relative mt-4">
-                <CornerMarks tone="paper" playOnMount />
-                <DeviceFramePlaceholder caption="Gym Retention & Operations Platform" />
-              </div>
-            </div>
+          <div
+            className="hero-anim lg:pb-1"
+            style={{ animationDelay: "560ms" }}
+          >
+            <ForgeProductShowcase />
           </div>
         </div>
       </div>

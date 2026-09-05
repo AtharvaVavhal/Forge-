@@ -2,38 +2,41 @@ import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
 
 const reasons = [
-  "A small, focused team",
-  "Direct communication",
-  "Proper scope, agreed before we build",
-  "Milestone-based delivery",
-  "Production-ready software",
-  "Support after launch",
+  ["Business first", "We start with the operating problem, not a feature list."],
+  ["Built to fit", "The work follows your business workflow instead of forcing it into a generic template."],
+  ["Design + engineering", "The interface and the system beneath it are shaped together."],
+  ["Direct communication", "The people defining the work stay close to the people building it."],
+  ["Modern foundations", "Clear structure, maintainable code, and practical technology choices."],
+  ["Room to improve", "Support after launch keeps useful software useful as the business changes."],
 ];
 
 export default function WhyForge() {
   return (
-    <section className="bg-paper">
+    <section className="bg-ink text-paper">
       <div className="mx-auto max-w-6xl px-6 py-20">
         <Reveal variant="subtle">
-          <Eyebrow number="06">Why FORGE</Eyebrow>
-          <h2 className="mt-3 max-w-lg font-display text-3xl font-bold text-ink md:text-4xl">
-            What working with us looks like
+          <Eyebrow tone="paper" number="05">Why Forge</Eyebrow>
+          <h2 className="mt-3 max-w-2xl font-display text-3xl font-bold leading-[1.08] md:text-5xl">
+            The work has to make sense before it can look good.
           </h2>
         </Reveal>
 
-        <ul className="mt-10 grid gap-x-8 gap-y-0 md:grid-cols-2">
-          {reasons.map((reason, index) => (
+        <ul className="mt-12 grid gap-px overflow-hidden border border-paper/15 bg-paper/15 md:grid-cols-2 lg:grid-cols-3">
+          {reasons.map(([title, detail], index) => (
             <Reveal
-              key={reason}
+              key={title}
               as="li"
               variant="subtle"
               delay={index * 35}
-              className="flex items-baseline gap-3 border-b border-steel/15 py-4 text-ink"
+              className="group min-h-48 bg-ink p-6 transition-colors duration-[var(--duration-standard)] hover:bg-paper hover:text-ink"
             >
-              <span className="mono text-xs text-steel">
+              <span className="mono text-xs text-paper/45 transition-colors group-hover:text-ember-deep">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="text-base">{reason}</span>
+              <h3 className="mt-8 font-display text-xl font-bold">{title}</h3>
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-paper/65 transition-colors group-hover:text-ink/70">
+                {detail}
+              </p>
             </Reveal>
           ))}
         </ul>

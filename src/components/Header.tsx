@@ -47,7 +47,7 @@ export default function Header() {
   const mobileNav = (
     <div
       id="mobile-nav"
-      className={`fixed inset-0 z-40 bg-ink pt-[73px] text-paper transition-[opacity,visibility] duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] md:hidden ${
+      className={`fixed inset-0 z-40 bg-ink pt-[var(--header-height)] text-paper transition-[opacity,visibility] duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] md:hidden ${
         open ? "visible opacity-100" : "invisible opacity-0"
       }`}
     >
@@ -82,8 +82,8 @@ export default function Header() {
   );
 
   return (
-    <header className="hero-anim-fade sticky top-0 z-50 border-b border-steel/20 bg-paper/95 backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+    <header className="hero-anim-fade sticky top-0 z-50 h-[var(--header-height)] border-b border-steel/20 bg-paper/95 backdrop-blur">
+      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6">
         <Link href="/" aria-label="FORGE — home" className="text-ink">
           <Logo className="h-6 w-auto md:h-7" />
         </Link>
