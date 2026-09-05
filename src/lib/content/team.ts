@@ -10,7 +10,7 @@ export const team: TeamMember[] = [
   {
     name: "Atharva Vavhal",
     role: "Founder · Software Engineer",
-    education: "B.Tech. Computer Software Engineering",
+    education: "B.Tech. Computer Engineering (Software Engineering)",
     institution: "Vishwakarma Institute of Technology, Pune",
     focus: "Product · Engineering · Systems",
   },
