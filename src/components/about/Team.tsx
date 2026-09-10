@@ -1,8 +1,60 @@
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
-import { team } from "@/lib/content/team";
+import { team, type TeamMember } from "@/lib/content/team";
+
+type Slot = {
+  member: TeamMember;
+  numeral: string;
+  isFounder: boolean;
+  position: string;
+};
 
 export default function Team() {
+  const numeral = (index: number) => String(index + 1).padStart(2, "0");
+
+  const withIndex = team.map((member, index) => ({ member, index }));
+  const founderEntry =
+    withIndex.find(({ member }) =>
+      member.role.toLowerCase().includes("founder"),
+    ) ?? withIndex[0];
+  const [m1, m2, m3, m4] = withIndex.filter(
+    ({ index }) => index !== founderEntry.index,
+  );
+
+  const founderSlot: Slot = {
+    member: founderEntry.member,
+    numeral: numeral(founderEntry.index),
+    isFounder: true,
+    position: "sm:col-start-2 sm:row-start-2",
+  };
+  const topSlot: Slot = {
+    member: m1.member,
+    numeral: numeral(m1.index),
+    isFounder: false,
+    position: "sm:col-start-2 sm:row-start-1",
+  };
+  const rightSlot: Slot = {
+    member: m2.member,
+    numeral: numeral(m2.index),
+    isFounder: false,
+    position: "sm:col-start-3 sm:row-start-2",
+  };
+  const bottomSlot: Slot = {
+    member: m3.member,
+    numeral: numeral(m3.index),
+    isFounder: false,
+    position: "sm:col-start-2 sm:row-start-3",
+  };
+  const leftSlot: Slot = {
+    member: m4.member,
+    numeral: numeral(m4.index),
+    isFounder: false,
+    position: "sm:col-start-1 sm:row-start-2",
+  };
+
+  // Mobile stacks these in order — founder stays visually centered either way.
+  const slots = [topSlot, leftSlot, founderSlot, rightSlot, bottomSlot];
+
   return (
     <section className="mx-auto max-w-3xl px-6 py-14">
       <Reveal variant="subtle">
@@ -16,34 +68,40 @@ export default function Team() {
         </p>
       </Reveal>
 
-      <ul className="mt-10 grid gap-px border border-steel/20 bg-steel/20 sm:grid-cols-2">
-        {team.map((member, index) => (
+      <ul className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-4">
+        {slots.map((slot, position) => (
           <Reveal
-            key={member.name}
+            key={slot.member.name}
             as="li"
             variant="subtle"
-            delay={80 + index * 70}
-            className="group flex flex-col bg-paper-elev p-6 transition-transform duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] hover:-translate-y-0.5 sm:p-8"
+            delay={80 + position * 70}
+            className={`group flex flex-col items-center justify-between border bg-paper-elev p-5 text-center transition-transform duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] hover:-translate-y-0.5 sm:aspect-square sm:p-6 ${slot.position} ${
+              slot.isFounder ? "border-ember" : "border-steel/20"
+            }`}
           >
-            <span className="mono text-xs text-steel transition-colors duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] group-hover:text-ember-deep">
-              {String(index + 1).padStart(2, "0")}
+            <span className="mono text-[11px] text-steel transition-colors duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] group-hover:text-ember-deep">
+              {slot.numeral}
             </span>
-            <h3 className="mt-4 font-display text-xl font-bold leading-tight text-ink md:text-2xl">
-              {member.name}
-            </h3>
-            <p className="mt-1.5 text-sm font-semibold text-ink/80">
-              {member.role}
-            </p>
-            <p className="mt-4 text-sm leading-relaxed text-steel">
-              {member.education}
-              <br />
-              {member.institution}
-            </p>
-            <div className="mt-auto pt-6">
-              <p className="mono border-t border-steel/20 pt-4 text-[11px] uppercase leading-relaxed tracking-[0.16em] text-steel">
-                {member.focus}
+            <div>
+              <h3
+                className={`font-display font-bold leading-tight text-ink ${
+                  slot.isFounder ? "text-xl md:text-2xl" : "text-lg"
+                }`}
+              >
+                {slot.member.name}
+              </h3>
+              <p className="mt-1 text-xs font-semibold text-ink/80">
+                {slot.member.role}
               </p>
             </div>
+            <p className="text-[11px] leading-snug text-steel">
+              {slot.member.education}
+              <br />
+              {slot.member.institution}
+            </p>
+            <p className="mono border-t border-steel/20 pt-3 text-[9px] uppercase leading-relaxed tracking-[0.14em] text-steel">
+              {slot.member.focus}
+            </p>
           </Reveal>
         ))}
       </ul>

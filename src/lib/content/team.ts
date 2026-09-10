@@ -35,4 +35,11 @@ export const team: TeamMember[] = [
     institution: "PES Modern College of Engineering, Pune",
     focus: "Product · UI/UX · Design",
   },
+  {
+    name: "Sharwari Patil",
+    role: "UI/UX Frontend Designer",
+    education: "B.Tech. Computer Engineering",
+    institution: "Vishwakarma Institute of Technology, Pune",
+    focus: "Product · UI/UX · Design",
+  },
 ];
