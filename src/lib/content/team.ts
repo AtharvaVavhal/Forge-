@@ -37,9 +37,9 @@ export const team: TeamMember[] = [
   },
   {
     name: "Sharwari Patil",
-    role: "UI/UX Frontend Designer",
+    role: "Product Designer & Frontend Engineer",
     education: "B.Tech. Computer Engineering",
     institution: "Vishwakarma Institute of Technology, Pune",
-    focus: "Product · UI/UX · Design",
+    focus: "Product · UI/UX · Frontend",
   },
 ];
