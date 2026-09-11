@@ -16,17 +16,17 @@ export const team: TeamMember[] = [
   },
   {
     name: "Atharva Jadhav",
-    role: "Software Engineer",
+    role: "Full-Stack Engineer",
     education: "B.Tech. Computer Engineering",
     institution: "Vishwakarma Institute of Technology, Pune",
-    focus: "Engineering",
+    focus: "Frontend · Backend · Engineering",
   },
   {
     name: "Harshad Gat",
-    role: "Software Engineer",
+    role: "Backend Engineer",
     education: "B.Tech. Computer Engineering",
     institution: "Pimpri Chinchwad College of Engineering, Pune",
-    focus: "Engineering",
+    focus: "Backend · Engineering",
   },
   {
     name: "Shrikant Salunkhe",
