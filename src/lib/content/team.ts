@@ -23,17 +23,17 @@ export const team: TeamMember[] = [
   },
   {
     name: "Harshad Gat",
-    role: "Backend Engineer",
+    role: "Co-Founder · Backend Engineer",
     education: "B.Tech. Computer Engineering",
     institution: "Pimpri Chinchwad College of Engineering, Pune",
     focus: "Backend · Engineering",
   },
   {
     name: "Shrikant Salunkhe",
-    role: "Product Designer",
+    role: "Head of Marketing",
     education: "B.Tech. Information Technology",
     institution: "PES Modern College of Engineering, Pune",
-    focus: "Product · UI/UX · Design",
+    focus: "Marketing · Growth",
   },
   {
     name: "Sharwari Patil",
