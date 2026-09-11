@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
 import Team from "@/components/about/Team";
 import { processSteps } from "@/lib/content/process";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About — FORGE",
   description:
     "FORGE is a small, focused web and software development studio based in Pune.",
-};
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

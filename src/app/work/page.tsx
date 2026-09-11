@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import DeviceFramePlaceholder from "@/components/DeviceFramePlaceholder";
 import Reveal from "@/components/Reveal";
 import HoverArrow from "@/components/HoverArrow";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Work — FORGE",
   description:
     "Case studies from FORGE, a web and software development studio in Pune.",
-};
+  path: "/work",
+});
 
 export default function WorkPage() {
   return (

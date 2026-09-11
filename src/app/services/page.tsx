@@ -1,19 +1,42 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
 import HoverArrow from "@/components/HoverArrow";
 import { services } from "@/lib/content/services";
+import { pageMetadata, SITE_NAME } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Services — FORGE",
   description:
     "Websites, web applications, e-commerce, business automation, mobile apps and maintenance — built around how your business actually operates.",
+  path: "/services",
+});
+
+const servicesJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  itemListElement: services.map((service, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Service",
+      name: service.name,
+      description: service.what,
+      provider: {
+        "@type": "Organization",
+        name: SITE_NAME,
+      },
+    },
+  })),
 };
 
 export default function ServicesPage() {
   return (
     <div className="bg-paper">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
+      />
       <section className="mx-auto max-w-4xl px-6 py-20">
         <Reveal variant="subtle">
           <Eyebrow>Services</Eyebrow>

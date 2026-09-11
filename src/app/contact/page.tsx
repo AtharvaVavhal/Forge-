@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/contact/ContactForm";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Start a Project — FORGE",
+export const metadata = pageMetadata({
+  title: "Contact FORGE — Start a Project",
   description:
     "Tell us what you're building. We reply with next steps, not a sales pitch.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

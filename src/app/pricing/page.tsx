@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
 import { websiteTiers, scopeSteps } from "@/lib/content/pricing";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Pricing — FORGE",
   description:
     "Website starting prices and how custom software is scoped and priced at FORGE.",
-};
+  path: "/pricing",
+});
 
 export default function PricingPage() {
   return (
