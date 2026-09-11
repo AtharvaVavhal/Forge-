@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 export const SITE_URL = "https://forgebuilds.in";
 export const SITE_NAME = "FORGE";
+export const SITE_EMAIL = "shrikant.salunkhe@forgebuilds.in";
 
 export const SITE_TITLE = "FORGE — Web & Software Development Studio, Pune";
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import Logo from "@/components/Logo";
+import { SITE_EMAIL } from "@/lib/seo";
 
 const navLinks = [
   { href: "/services", label: "Services" },
@@ -37,10 +38,7 @@ export default function Footer() {
           </nav>
 
           <div className="mono text-sm text-paper/70">
-            <p>
-              hello@forgebuilds.in{" "}
-              <span className="text-paper/40">(TODO: confirm the email)</span>
-            </p>
+            <p>{SITE_EMAIL}</p>
             <p className="mt-1.5">  
               +91 74992 74587{" "}
               <span className="text-paper/40">(TODO: confirm phone)</span>

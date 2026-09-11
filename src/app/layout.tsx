@@ -3,7 +3,13 @@ import { Archivo, Source_Serif_4, IBM_Plex_Mono } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
-import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/seo";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  SITE_EMAIL,
+} from "@/lib/seo";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -73,6 +79,7 @@ const organizationJsonLd = {
   url: SITE_URL,
   logo: `${SITE_URL}/logo.png`,
   description: SITE_DESCRIPTION,
+  email: SITE_EMAIL,
   address: {
     "@type": "PostalAddress",
     addressLocality: "Pune",
