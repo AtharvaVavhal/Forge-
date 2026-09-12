@@ -558,3 +558,361 @@ h6 {
   .forge-work-preview__body { min-height: 17rem; }
   .forge-work-preview__nodes div { padding: 0.55rem; font-size: 0.58rem; }
 }
+
+/* About team stack: a portrait study in front, member details on the reverse. */
+.team-carousel {
+  --team-card-width: 19rem;
+  position: relative;
+  isolation: isolate;
+}
+
+.team-carousel__stage {
+  position: relative;
+  height: 27rem;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.team-card-wrap {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--team-card-width);
+  height: 25rem;
+  opacity: var(--card-opacity);
+  pointer-events: none;
+  transform: translate3d(calc(-50% + var(--card-x)), 0, var(--card-z)) rotateZ(var(--card-rotate)) scale(var(--card-scale));
+  transform-style: preserve-3d;
+  transition: transform 620ms var(--ease-in-out-forge), opacity 620ms var(--ease-in-out-forge);
+  will-change: transform, opacity;
+}
+
+.team-card-wrap.is-visible {
+  pointer-events: auto;
+}
+
+.team-card-wrap.is-active {
+  filter: drop-shadow(0 30px 25px rgba(23, 20, 15, 0.2));
+}
+
+.team-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  perspective: 1200px;
+  text-align: left;
+  transform: translateZ(0);
+}
+
+.team-card:focus-visible {
+  outline: 2px solid var(--color-ember-deep);
+  outline-offset: 7px;
+}
+
+.team-card__flipper {
+  position: absolute;
+  inset: 0;
+  display: block;
+  transform-style: preserve-3d;
+  transition: transform 620ms var(--ease-in-out-forge);
+  will-change: transform;
+}
+
+.team-card__flipper.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.team-card__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(107, 100, 89, 0.35);
+  border-radius: 0.85rem;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 22px 45px -28px rgba(23, 20, 15, 0.6);
+}
+
+.team-card__front {
+  background: var(--color-paper-elev);
+}
+
+.team-card__back {
+  transform: rotateY(180deg);
+  background: var(--color-ink);
+  border-color: rgba(242, 236, 223, 0.2);
+  color: var(--color-paper);
+}
+
+.team-card__topline {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.95rem 1rem;
+  border-bottom: 1px solid rgba(107, 100, 89, 0.2);
+  color: var(--color-steel);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+}
+
+.team-card__back .team-card__topline {
+  border-color: rgba(242, 236, 223, 0.12);
+  color: rgba(242, 236, 223, 0.5);
+}
+
+.team-card__portrait {
+  position: relative;
+  display: grid;
+  flex: 1;
+  place-items: center;
+  overflow: hidden;
+  background: #e8dcc8;
+}
+
+.team-card__portrait::before {
+  position: absolute;
+  inset: 12% 15%;
+  border: 1px solid rgba(23, 20, 15, 0.2);
+  content: "";
+  transform: rotate(10deg);
+}
+
+.team-card__portrait-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  background-image: linear-gradient(rgba(23, 20, 15, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(23, 20, 15, 0.12) 1px, transparent 1px);
+  background-size: 1.5rem 1.5rem;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.team-card__portrait-ring {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  border: 1px solid rgba(184, 90, 34, 0.65);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5rem rgba(184, 90, 34, 0.08), 0 0 0 3rem rgba(23, 20, 15, 0.05);
+  transform: rotate(-25deg) scaleY(0.64);
+}
+
+.team-card__initials {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 8.5rem;
+  height: 8.5rem;
+  place-items: center;
+  border: 1px solid var(--color-ink);
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-archivo), sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.team-card__portrait-label {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.9rem;
+  color: rgba(23, 20, 15, 0.6);
+  font-size: 0.5rem;
+  letter-spacing: 0.12em;
+}
+
+.team-card__front-footer {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 5.5rem;
+  padding: 1rem;
+  border-top: 1px solid rgba(107, 100, 89, 0.2);
+}
+
+.team-card__front-footer strong,
+.team-card__front-footer small {
+  display: block;
+}
+
+.team-card__front-footer strong {
+  font-family: var(--font-archivo), sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.05;
+}
+
+.team-card__front-footer small {
+  max-width: 9rem;
+  margin-top: 0.35rem;
+  color: rgba(23, 20, 15, 0.65);
+  font-size: 0.72rem;
+  line-height: 1.2;
+}
+
+.team-card__cue {
+  flex-shrink: 0;
+  color: var(--color-ember-deep);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.team-card__back .team-card__cue {
+  margin: auto 1rem 1rem;
+  color: var(--color-ember-bright);
+}
+
+.team-card__details {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.5rem 1.1rem 1rem;
+}
+
+.team-card__label,
+.team-card__detail-block small {
+  color: var(--color-ember-bright);
+  font-size: 0.52rem;
+  letter-spacing: 0.13em;
+}
+
+.team-card__details > strong {
+  margin-top: 1.4rem;
+  font-family: var(--font-archivo), sans-serif;
+  font-size: 1.7rem;
+  line-height: 0.98;
+}
+
+.team-card__role {
+  margin-top: 0.45rem;
+  color: rgba(242, 236, 223, 0.7);
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.team-card__rule {
+  width: 3.5rem;
+  height: 1px;
+  margin: 1.5rem 0 1.1rem;
+  background: var(--color-ember-bright);
+}
+
+.team-card__detail-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.9rem;
+  color: rgba(242, 236, 223, 0.78);
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.team-card__detail-block span + span {
+  color: rgba(242, 236, 223, 0.55);
+}
+
+.team-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--team-card-width);
+  margin: 1rem auto 0;
+  border-top: 1px solid rgba(107, 100, 89, 0.22);
+  padding-top: 0.85rem;
+}
+
+.team-carousel__control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color var(--duration-fast) var(--ease-out-forge), transform var(--duration-fast) var(--ease-out-forge);
+}
+
+.team-carousel__control:hover,
+.team-carousel__control:focus-visible {
+  color: var(--color-ember-deep);
+}
+
+.team-carousel__control:hover:first-child { transform: translateX(-0.2rem); }
+.team-carousel__control:hover:last-child { transform: translateX(0.2rem); }
+
+.team-carousel__control:focus-visible {
+  outline: 2px solid var(--color-ember-deep);
+  outline-offset: 4px;
+}
+
+.team-carousel__control .mono {
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+}
+
+.team-carousel__count {
+  color: var(--color-steel);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+}
+
+@media (min-width: 768px) {
+  .team-card-wrap:not(.is-active):hover {
+    opacity: 0.95;
+    transform: translate3d(calc(-50% + var(--card-x)), -0.45rem, calc(var(--card-z) + 18px)) rotateZ(var(--card-rotate)) scale(var(--card-scale));
+  }
+
+  .team-card-wrap.is-active:hover .team-card {
+    transform: translateZ(8px);
+  }
+}
+
+@media (max-width: 767px) {
+  .team-carousel {
+    --team-card-width: min(18rem, 72vw);
+  }
+
+  .team-carousel__stage {
+    height: 25rem;
+    perspective: 900px;
+  }
+
+  .team-card-wrap {
+    height: 23rem;
+  }
+
+  .team-card-wrap[style*="--card-x: -116%"],
+  .team-card-wrap[style*="--card-x: 116%"] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .team-card__details > strong {
+    font-size: 1.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-card-wrap,
+  .team-card__flipper,
+  .team-card,
+  .team-carousel__control {
+    transition: none !important;
+  }
+
+  .team-card-wrap:not(.is-active):hover,
+  .team-card-wrap.is-active:hover .team-card {
+    transform: translate3d(calc(-50% + var(--card-x)), 0, var(--card-z)) rotateZ(var(--card-rotate)) scale(var(--card-scale));
+  }
+}
