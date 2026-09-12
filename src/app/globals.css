@@ -561,7 +561,7 @@ h6 {
 
 /* About team stack: a portrait study in front, member details on the reverse. */
 .team-carousel {
-  --team-card-width: 19rem;
+  --team-card-width: clamp(11rem, 18.5vw, 20rem);
   position: relative;
   isolation: isolate;
 }
@@ -573,15 +573,29 @@ h6 {
   transform-style: preserve-3d;
 }
 
+.team-carousel__stage::before {
+  position: absolute;
+  inset: -2rem 8%;
+  z-index: -1;
+  opacity: 0.42;
+  background-image: linear-gradient(rgba(107, 100, 89, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(107, 100, 89, 0.12) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  content: "";
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+  pointer-events: none;
+  transform: translateZ(-180px);
+}
+
 .team-card-wrap {
   position: absolute;
   top: 0;
   left: 50%;
   width: var(--team-card-width);
-  height: 25rem;
+  aspect-ratio: 19 / 25;
+  height: auto;
   opacity: var(--card-opacity);
   pointer-events: none;
-  transform: translate3d(calc(-50% + var(--card-x)), 0, var(--card-z)) rotateZ(var(--card-rotate)) scale(var(--card-scale));
+  transform: translateX(calc(-50% + var(--card-x))) rotateZ(var(--card-rotate)) scale(var(--card-scale));
   transform-style: preserve-3d;
   transition: transform 620ms var(--ease-in-out-forge), opacity 620ms var(--ease-in-out-forge);
   will-change: transform, opacity;
@@ -619,6 +633,7 @@ h6 {
   position: absolute;
   inset: 0;
   display: block;
+  pointer-events: none;
   transform-style: preserve-3d;
   transition: transform 620ms var(--ease-in-out-forge);
   will-change: transform;
@@ -820,57 +835,10 @@ h6 {
   color: rgba(242, 236, 223, 0.55);
 }
 
-.team-carousel__controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: var(--team-card-width);
-  margin: 1rem auto 0;
-  border-top: 1px solid rgba(107, 100, 89, 0.22);
-  padding-top: 0.85rem;
-}
-
-.team-carousel__control {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.25rem 0;
-  border: 0;
-  background: transparent;
-  color: var(--color-ink);
-  cursor: pointer;
-  font-size: 1rem;
-  transition: color var(--duration-fast) var(--ease-out-forge), transform var(--duration-fast) var(--ease-out-forge);
-}
-
-.team-carousel__control:hover,
-.team-carousel__control:focus-visible {
-  color: var(--color-ember-deep);
-}
-
-.team-carousel__control:hover:first-child { transform: translateX(-0.2rem); }
-.team-carousel__control:hover:last-child { transform: translateX(0.2rem); }
-
-.team-carousel__control:focus-visible {
-  outline: 2px solid var(--color-ember-deep);
-  outline-offset: 4px;
-}
-
-.team-carousel__control .mono {
-  font-size: 0.55rem;
-  letter-spacing: 0.1em;
-}
-
-.team-carousel__count {
-  color: var(--color-steel);
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-}
-
 @media (min-width: 768px) {
   .team-card-wrap:not(.is-active):hover {
     opacity: 0.95;
-    transform: translate3d(calc(-50% + var(--card-x)), -0.45rem, calc(var(--card-z) + 18px)) rotateZ(var(--card-rotate)) scale(var(--card-scale));
+    transform: translateX(calc(-50% + var(--card-x))) translateY(-0.45rem) rotateZ(var(--card-rotate)) scale(var(--card-scale));
   }
 
   .team-card-wrap.is-active:hover .team-card {
@@ -892,8 +860,8 @@ h6 {
     height: 23rem;
   }
 
-  .team-card-wrap[style*="--card-x: -116%"],
-  .team-card-wrap[style*="--card-x: 116%"] {
+  .team-card-wrap[style*="--card-x: -190%"],
+  .team-card-wrap[style*="--card-x: 190%"] {
     opacity: 0;
     pointer-events: none;
   }
@@ -907,12 +875,12 @@ h6 {
   .team-card-wrap,
   .team-card__flipper,
   .team-card,
-  .team-carousel__control {
+  .team-carousel__stage::before {
     transition: none !important;
   }
 
   .team-card-wrap:not(.is-active):hover,
   .team-card-wrap.is-active:hover .team-card {
-    transform: translate3d(calc(-50% + var(--card-x)), 0, var(--card-z)) rotateZ(var(--card-rotate)) scale(var(--card-scale));
+    transform: translateX(calc(-50% + var(--card-x))) rotateZ(var(--card-rotate)) scale(var(--card-scale));
   }
 }

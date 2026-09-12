@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useState, type CSSProperties } from "react";
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
 import { team } from "@/lib/content/team";
 
 const CARD_POSITIONS = [
-  { x: "-116%", rotate: "-13deg", scale: "0.82", z: "-150px", opacity: "0.5" },
-  { x: "-62%", rotate: "-7deg", scale: "0.91", z: "-70px", opacity: "0.78" },
+  { x: "-190%", rotate: "-15deg", scale: "0.82", z: "-150px", opacity: "0.58" },
+  { x: "-100%", rotate: "-7deg", scale: "0.9", z: "-70px", opacity: "0.82" },
   { x: "0%", rotate: "0deg", scale: "1", z: "0px", opacity: "1" },
-  { x: "62%", rotate: "7deg", scale: "0.91", z: "-70px", opacity: "0.78" },
-  { x: "116%", rotate: "13deg", scale: "0.82", z: "-150px", opacity: "0.5" },
+  { x: "100%", rotate: "7deg", scale: "0.9", z: "-70px", opacity: "0.82" },
+  { x: "190%", rotate: "15deg", scale: "0.82", z: "-150px", opacity: "0.58" },
 ] as const;
 
 function getRelativePosition(index: number, activeIndex: number) {
@@ -43,18 +43,22 @@ export default function Team() {
     selectMember((activeIndex + direction + team.length) % team.length);
   }
 
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "ArrowLeft") moveActive(-1);
-      if (event.key === "ArrowRight") moveActive(1);
+  function handleCardKeyDown(event: React.KeyboardEvent<HTMLButtonElement>, index: number) {
+    if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+      event.preventDefault();
+      moveActive(event.key === "ArrowLeft" ? -1 : 1);
     }
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  });
+    if (event.key === "Home" || event.key === "End") {
+      event.preventDefault();
+      selectMember(event.key === "Home" ? 0 : team.length - 1);
+    }
+    if (event.key === "Escape" && index === activeIndex && flipped) {
+      setFlipped(false);
+    }
+  }
 
   return (
-    <section className="mx-auto max-w-3xl px-6 py-14">
+    <section className="mx-auto max-w-7xl px-6 py-14">
       <Reveal variant="subtle">
         <Eyebrow>The People Behind Forge</Eyebrow>
         <h2 className="mt-3 font-display text-2xl font-bold text-ink md:text-3xl">
@@ -66,8 +70,12 @@ export default function Team() {
         </p>
       </Reveal>
 
-      <div className="team-carousel mt-10" aria-roledescription="carousel">
-        <div className="team-carousel__stage" role="list" aria-label="Forge team members">
+      <div className="team-carousel mt-10">
+        <div
+          className="team-carousel__stage"
+          role="list"
+          aria-label="Forge team members"
+        >
           {team.map((member, index) => {
             const relativePosition = getRelativePosition(index, activeIndex);
             const isActive = relativePosition === 0;
@@ -91,6 +99,7 @@ export default function Team() {
                   }`}
                   aria-pressed={isActive && flipped}
                   tabIndex={isVisible ? 0 : -1}
+                  onKeyDown={(event) => handleCardKeyDown(event, index)}
                   onClick={() => {
                     if (!isActive) {
                       selectMember(index);
@@ -149,16 +158,6 @@ export default function Team() {
               </div>
             );
           })}
-        </div>
-
-        <div className="team-carousel__controls">
-          <button type="button" className="team-carousel__control" onClick={() => moveActive(-1)} aria-label="Previous team member">
-            ← <span className="mono">PREV</span>
-          </button>
-          <span className="mono team-carousel__count">{String(activeIndex + 1).padStart(2, "0")} / {String(team.length).padStart(2, "0")}</span>
-          <button type="button" className="team-carousel__control" onClick={() => moveActive(1)} aria-label="Next team member">
-            <span className="mono">NEXT</span> →
-          </button>
         </div>
       </div>
 
