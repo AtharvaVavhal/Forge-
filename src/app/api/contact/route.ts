@@ -1,4 +1,3 @@
-export const runtime = "edge";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import {
@@ -63,30 +62,35 @@ export async function POST(request: Request) {
   }
 
   // --- 1. Save to Supabase ---------------------------------------------
-  const supabase = getSupabaseAdmin();
   let dbSaved = false;
 
-  if (supabase) {
-    const { error: dbError } = await supabase.from("contact_submissions").insert({
-      name: data.name,
-      business_name: data.businessName,
-      email: data.email,
-      phone: data.phone,
-      project_type: data.projectType,
-      description: data.description,
-      budget: data.budget,
-      timeline: data.timeline || null,
-    });
+  try {
+    const supabase = getSupabaseAdmin();
 
-    if (dbError) {
-      console.error("Supabase insert error:", dbError);
+    if (supabase) {
+      const { error: dbError } = await supabase.from("contact_submissions").insert({
+        name: data.name,
+        business_name: data.businessName,
+        email: data.email,
+        phone: data.phone,
+        project_type: data.projectType,
+        description: data.description,
+        budget: data.budget,
+        timeline: data.timeline || null,
+      });
+
+      if (dbError) {
+        console.error("Supabase insert error:", dbError);
+      } else {
+        dbSaved = true;
+      }
     } else {
-      dbSaved = true;
+      console.error(
+        "Supabase is not configured: set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY."
+      );
     }
-  } else {
-    console.error(
-      "Supabase is not configured: set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY."
-    );
+  } catch (err) {
+    console.error("Supabase insert threw:", err);
   }
 
   // --- 2. Send email notification via Resend ----------------------------
