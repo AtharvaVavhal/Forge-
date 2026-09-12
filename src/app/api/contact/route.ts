@@ -1,3 +1,4 @@
+export const runtime = "edge";
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import {
@@ -5,6 +6,7 @@ import {
   emptyContactForm,
   validateContactForm,
 } from "@/lib/contact";
+import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
 
 function toContactFormData(body: unknown): ContactFormData {
   const record =
@@ -60,54 +62,77 @@ export async function POST(request: Request) {
     return NextResponse.json({ errors }, { status: 422 });
   }
 
+  // --- 1. Save to Supabase ---------------------------------------------
+  const supabase = getSupabaseAdmin();
+  let dbSaved = false;
+
+  if (supabase) {
+    const { error: dbError } = await supabase.from("contact_submissions").insert({
+      name: data.name,
+      business_name: data.businessName,
+      email: data.email,
+      phone: data.phone,
+      project_type: data.projectType,
+      description: data.description,
+      budget: data.budget,
+      timeline: data.timeline || null,
+    });
+
+    if (dbError) {
+      console.error("Supabase insert error:", dbError);
+    } else {
+      dbSaved = true;
+    }
+  } else {
+    console.error(
+      "Supabase is not configured: set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY."
+    );
+  }
+
+  // --- 2. Send email notification via Resend ----------------------------
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL_TO;
   const from = process.env.CONTACT_EMAIL_FROM;
 
-  if (!apiKey || !to || !from) {
+  let emailSent = false;
+
+  if (apiKey && to && from) {
+    try {
+      const resend = new Resend(apiKey);
+      const { error: emailError } = await resend.emails.send({
+        from,
+        to,
+        replyTo: data.email,
+        subject: `New project enquiry — ${data.businessName}`,
+        text: emailText(data),
+      });
+
+      if (emailError) {
+        console.error("Resend error:", emailError);
+      } else {
+        emailSent = true;
+      }
+    } catch (err) {
+      console.error("Contact form send failed:", err);
+    }
+  } else {
     console.error(
-      "Contact form is not configured: set RESEND_API_KEY, CONTACT_EMAIL_TO and CONTACT_EMAIL_FROM."
-    );
-    return NextResponse.json(
-      {
-        error:
-          "This form isn't fully set up yet — the submission couldn't be sent. Please try again shortly.",
-      },
-      { status: 500 }
+      "Email is not configured: set RESEND_API_KEY, CONTACT_EMAIL_TO and CONTACT_EMAIL_FROM."
     );
   }
 
-  const resend = new Resend(apiKey);
-
-  try {
-    const { error } = await resend.emails.send({
-      from,
-      to,
-      replyTo: data.email,
-      subject: `New project enquiry — ${data.businessName}`,
-      text: emailText(data),
-    });
-
-    if (error) {
-      console.error("Resend error:", error);
-      return NextResponse.json(
-        {
-          error:
-            "We couldn't send this submission just now. Please try again in a moment.",
-        },
-        { status: 502 }
-      );
-    }
-  } catch (err) {
-    console.error("Contact form send failed:", err);
+  // --- 3. Decide the response ---------------------------------------------
+  // The submission only truly fails if we failed to both store it AND
+  // notify anyone about it — otherwise the lead isn't lost.
+  if (!dbSaved && !emailSent) {
     return NextResponse.json(
       {
         error:
-          "We couldn't send this submission just now. Please try again in a moment.",
+          "We couldn't process this submission just now. Please try again in a moment, or reach out directly.",
       },
       { status: 502 }
     );
   }
 
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, dbSaved, emailSent });
 }
