@@ -48,7 +48,9 @@ export default function Header() {
     <div
       id="mobile-nav"
       className={`fixed inset-0 z-40 bg-ink pt-[var(--header-height)] text-paper transition-[opacity,visibility] duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] md:hidden ${
-        open ? "visible opacity-100" : "invisible opacity-0"
+        open
+          ? "visible pointer-events-auto opacity-100"
+          : "invisible pointer-events-none opacity-0"
       }`}
     >
       <nav className="flex h-full flex-col justify-between px-6 py-10">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useRef, useState, type CSSProperties } from "react";
 import Eyebrow from "@/components/Eyebrow";
 import Reveal from "@/components/Reveal";
 import { team } from "@/lib/content/team";
@@ -12,6 +12,17 @@ const CARD_POSITIONS = [
   { x: "100%", rotate: "7deg", scale: "0.9", z: "-70px", opacity: "0.82" },
   { x: "190%", rotate: "15deg", scale: "0.82", z: "-150px", opacity: "0.58" },
 ] as const;
+
+const SWIPE_THRESHOLD = 48;
+const TAP_THRESHOLD = 10;
+
+type TouchGesture = {
+  x: number;
+  y: number;
+  time: number;
+  index: number | null;
+  phase: "pending" | "swipe";
+};
 
 function getRelativePosition(index: number, activeIndex: number) {
   const distance = (index - activeIndex + team.length) % team.length;
@@ -33,6 +44,7 @@ function getCardStyle(relativePosition: number): CSSProperties {
 export default function Team() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
+  const touchGesture = useRef<TouchGesture | null>(null);
 
   function selectMember(index: number) {
     setActiveIndex(index);
@@ -57,6 +69,80 @@ export default function Team() {
     }
   }
 
+  function handlePointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    if (!event.isPrimary || event.pointerType !== "touch") return;
+
+    const target =
+      event.target instanceof Element
+        ? event.target.closest<HTMLButtonElement>('.team-card')
+        : null;
+    touchGesture.current = {
+      x: event.clientX,
+      y: event.clientY,
+      time: event.timeStamp,
+      index: target ? Number(target.dataset.teamIndex) : null,
+      phase: "pending",
+    };
+  }
+
+  function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    const gesture = touchGesture.current;
+    if (!gesture || event.pointerType !== "touch") return;
+
+    const deltaX = event.clientX - gesture.x;
+    const deltaY = event.clientY - gesture.y;
+    if (
+      gesture.phase === "pending" &&
+      Math.abs(deltaX) >= SWIPE_THRESHOLD &&
+      Math.abs(deltaX) > Math.abs(deltaY)
+    ) {
+      gesture.phase = "swipe";
+    }
+
+    if (gesture.phase === "swipe") event.preventDefault();
+  }
+
+  function handlePointerUp(event: React.PointerEvent<HTMLDivElement>) {
+    const gesture = touchGesture.current;
+    touchGesture.current = null;
+    if (!gesture || !event.isPrimary || event.pointerType !== "touch") return;
+
+    const deltaX = event.clientX - gesture.x;
+    const deltaY = event.clientY - gesture.y;
+    const target =
+      event.target instanceof Element
+        ? event.target.closest<HTMLButtonElement>('.team-card')
+        : null;
+    const targetIndex = target ? Number(target.dataset.teamIndex) : gesture.index;
+    const isSwipe =
+      gesture.phase === "swipe" ||
+      (Math.abs(deltaX) >= SWIPE_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY));
+    const isTap =
+      Math.abs(deltaX) <= TAP_THRESHOLD &&
+      Math.abs(deltaY) <= TAP_THRESHOLD &&
+      event.timeStamp - gesture.time < 1000 &&
+      targetIndex !== null;
+
+    if (isSwipe) {
+      event.preventDefault();
+      moveActive(deltaX < 0 ? 1 : -1);
+      return;
+    }
+
+    if (isTap) {
+      event.preventDefault();
+      if (targetIndex === activeIndex) {
+        setFlipped((value) => !value);
+      } else {
+        selectMember(targetIndex);
+      }
+    }
+  }
+
+  function handlePointerCancel(event: React.PointerEvent<HTMLDivElement>) {
+    if (event.pointerType === "touch") touchGesture.current = null;
+  }
+
   return (
     <section className="mx-auto max-w-7xl px-6 py-14">
       <Reveal variant="subtle">
@@ -75,6 +161,10 @@ export default function Team() {
           className="team-carousel__stage"
           role="list"
           aria-label="Forge team members"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerCancel}
         >
           {team.map((member, index) => {
             const relativePosition = getRelativePosition(index, activeIndex);
@@ -94,13 +184,20 @@ export default function Team() {
                 <button
                   type="button"
                   className="team-card"
+                  data-team-index={index}
                   aria-label={`${member.name}, ${member.role}${
                     isActive ? ". View details." : ". Select member."
                   }`}
                   aria-pressed={isActive && flipped}
                   tabIndex={isVisible ? 0 : -1}
                   onKeyDown={(event) => handleCardKeyDown(event, index)}
-                  onClick={() => {
+                  onClick={(event) => {
+                    if (
+                      event.detail !== 0 &&
+                      window.matchMedia("(pointer: coarse)").matches
+                    ) {
+                      return;
+                    }
                     if (!isActive) {
                       selectMember(index);
                     } else {

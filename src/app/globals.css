@@ -848,16 +848,20 @@ h6 {
 
 @media (max-width: 767px) {
   .team-carousel {
-    --team-card-width: min(18rem, 72vw);
+    --team-card-width: min(19rem, calc(100vw - 4rem));
+    overflow: hidden;
   }
 
   .team-carousel__stage {
-    height: 25rem;
-    perspective: 900px;
+    height: min(31rem, calc((100vw - 4rem) * 1.48));
+    min-height: 26rem;
+    overflow: hidden;
+    perspective: 1100px;
+    touch-action: pan-y;
   }
 
   .team-card-wrap {
-    height: 23rem;
+    height: auto;
   }
 
   .team-card-wrap[style*="--card-x: -190%"],
