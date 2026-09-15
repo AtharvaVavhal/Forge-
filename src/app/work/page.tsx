@@ -53,6 +53,38 @@ export default function WorkPage() {
         </Reveal>
       </section>
 
+      <section className="mx-auto max-w-4xl px-6 pb-10">
+        <Reveal variant="clip">
+          <Link
+            href="https://rotimatic-next1.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group grid gap-8 rounded-2xl bg-paper-elev p-8 shadow-sm transition-[transform,box-shadow] duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] hover:-translate-y-1 hover:shadow-lg md:grid-cols-2 md:items-center md:p-10"
+          >
+            <div>
+              <p className="mono text-xs uppercase tracking-[0.2em] text-steel">
+                Case Study
+              </p>
+              <h2 className="mt-3 font-display text-2xl font-bold text-ink md:text-3xl">
+                Rotimatic NEXT — D2C Product &amp; Ordering Platform
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-ink/80">
+                A full D2C storefront for an automatic roti maker —
+                product configurator, cart and checkout with Razorpay,
+                order tracking dashboard, and a sales enquiry pipeline,
+                built end to end.
+              </p>
+              <span className="font-display mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors duration-[var(--duration-fast)] group-hover:text-ember-deep">
+                View live site
+                <HoverArrow />
+              </span>
+            </div>
+
+            <DeviceFramePlaceholder caption="Rotimatic NEXT — Product & Ordering Platform" />
+          </Link>
+        </Reveal>
+      </section>
+
       <section className="mx-auto max-w-4xl px-6 pb-24">
         <p className="mono text-sm text-steel">More work in progress.</p>
       </section>
