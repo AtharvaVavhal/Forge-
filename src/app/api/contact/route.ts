@@ -6,6 +6,8 @@ import {
   validateContactForm,
 } from "@/lib/contact";
 import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
+import { renderInternalNotificationEmail } from "@/lib/email/internalNotification";
+import { renderClientConfirmationEmail } from "@/lib/email/clientConfirmation";
 
 function toContactFormData(body: unknown): ContactFormData {
   const record =
@@ -26,21 +28,6 @@ function toContactFormData(body: unknown): ContactFormData {
     budget: field("budget"),
     timeline: field("timeline"),
   };
-}
-
-function emailText(data: ContactFormData): string {
-  return [
-    `Name: ${data.name}`,
-    `Business: ${data.businessName}`,
-    `Email: ${data.email}`,
-    `Phone: ${data.phone}`,
-    `Project type: ${data.projectType}`,
-    `Budget: ${data.budget}`,
-    `Timeline: ${data.timeline || "Not specified"}`,
-    "",
-    "Project description:",
-    data.description,
-  ].join("\n");
 }
 
 export async function POST(request: Request) {
@@ -93,31 +80,33 @@ export async function POST(request: Request) {
     console.error("Supabase insert threw:", err);
   }
 
-  // --- 2. Send email notification via Resend ----------------------------
+  // --- 2. Notify the Forge team via Resend -------------------------------
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_EMAIL_TO;
   const from = process.env.CONTACT_EMAIL_FROM;
 
   let emailSent = false;
+  const resend = apiKey ? new Resend(apiKey) : null;
 
-  if (apiKey && to && from) {
+  if (resend && to && from) {
     try {
-      const resend = new Resend(apiKey);
+      const internal = renderInternalNotificationEmail(data);
       const { error: emailError } = await resend.emails.send({
         from,
         to,
         replyTo: data.email,
-        subject: `New project enquiry — ${data.businessName}`,
-        text: emailText(data),
+        subject: internal.subject,
+        html: internal.html,
+        text: internal.text,
       });
 
       if (emailError) {
-        console.error("Resend error:", emailError);
+        console.error("Resend error (internal notification):", emailError);
       } else {
         emailSent = true;
       }
     } catch (err) {
-      console.error("Contact form send failed:", err);
+      console.error("Internal notification send failed:", err);
     }
   } else {
     console.error(
@@ -125,7 +114,29 @@ export async function POST(request: Request) {
     );
   }
 
-  // --- 3. Decide the response ---------------------------------------------
+  // --- 3. Send the client a confirmation ---------------------------------
+  // Best-effort: the lead is already captured above (Supabase and/or the
+  // internal notification), so a failure here must never fail the request.
+  if (resend && from) {
+    try {
+      const confirmation = renderClientConfirmationEmail(data);
+      const { error: confirmationError } = await resend.emails.send({
+        from,
+        to: data.email,
+        subject: confirmation.subject,
+        html: confirmation.html,
+        text: confirmation.text,
+      });
+
+      if (confirmationError) {
+        console.error("Resend error (client confirmation):", confirmationError);
+      }
+    } catch (err) {
+      console.error("Client confirmation send failed:", err);
+    }
+  }
+
+  // --- 4. Decide the response ---------------------------------------------
   // The submission only truly fails if we failed to both store it AND
   // notify anyone about it — otherwise the lead isn't lost.
   if (!dbSaved && !emailSent) {

@@ -40,7 +40,7 @@ export default function Footer() {
           <div className="mono text-sm text-paper/70">
             <p>{SITE_EMAIL}</p>
             <p className="mt-1.5">  
-              +91 74992 74587{" "}
+              +91 8600697250{" "}
               <span className="text-paper/40">(TODO: confirm phone)</span>
             </p>
           </div>
