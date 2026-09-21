@@ -29,7 +29,7 @@ export const team: TeamMember[] = [
     focus: "Backend · Engineering",
   },
   {
-    name: "Shrikant Salunkhe",
+    name: "Shrikant salunkhe",
     role: "Head of Marketing",
     education: "B.Tech. Information Technology",
     institution: "PES Modern College of Engineering, Pune",
