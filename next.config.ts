@@ -4,7 +4,7 @@ import path from "path";
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["192.168.1.3", "192.168.56.1"],
   turbopack: {
-    root: path.resolve(__dirname),
+    root: path.resolve(process.cwd()),
   },
 };
 

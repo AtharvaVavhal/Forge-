@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Eyebrow from "@/components/Eyebrow";
 import DeviceFramePlaceholder from "@/components/DeviceFramePlaceholder";
+import NookCardPreview from "@/components/nook/NookCardPreview";
 import Reveal from "@/components/Reveal";
 import HoverArrow from "@/components/HoverArrow";
 import { pageMetadata } from "@/lib/seo";
@@ -50,6 +51,69 @@ export default function WorkPage() {
 
             <DeviceFramePlaceholder caption="Gym Retention & Operations Platform" />
           </Link>
+        </Reveal>
+      </section>
+
+      <section className="mx-auto max-w-4xl px-6 pb-10">
+        <Reveal variant="clip">
+          <div className="group grid gap-8 rounded-2xl bg-paper-elev p-8 shadow-sm transition-[transform,box-shadow] duration-[var(--duration-standard)] ease-[var(--ease-out-forge)] hover:-translate-y-1 hover:shadow-lg md:grid-cols-2 md:items-center md:p-10">
+            <div>
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span className="mono text-xs uppercase tracking-[0.2em] font-semibold text-[#7657F6]">
+                  In-House Product
+                </span>
+                <span className="text-steel/40">·</span>
+                <span className="mono inline-flex items-center gap-1.5 rounded-full border border-[#7657F6]/30 bg-[#F4F1FF] px-2.5 py-0.5 text-[10px] font-medium text-[#171338]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#7657F6] animate-pulse" />
+                  In Development
+                </span>
+              </div>
+              <h2 className="mt-3 font-display text-2xl font-bold text-ink md:text-3xl">
+                Nook — Hostel &amp; PG Management Platform
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-ink/80">
+                A modern hostel and PG management platform designed to simplify resident
+                management, admissions, bookings, bed allocation and financial operations
+                through one unified system.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {["NestJS", "TypeScript", "PostgreSQL", "Prisma ORM", "React", "Vite"].map((tech) => (
+                  <span
+                    key={tech}
+                    className="mono rounded bg-paper px-2 py-0.5 text-[11px] text-steel"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-5">
+                <Link
+                  href="/work/nook-hostel-pg-platform"
+                  className="font-display inline-flex items-center gap-2 text-sm font-semibold text-ink transition-colors duration-[var(--duration-fast)] group-hover:text-ember-deep"
+                >
+                  Read the case study
+                  <HoverArrow />
+                </Link>
+                <a
+                  href="https://usenook.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-display inline-flex items-center gap-1.5 text-xs font-semibold text-steel transition-colors hover:text-[#7657F6]"
+                >
+                  usenook.in
+                  <span aria-hidden>↗</span>
+                </a>
+              </div>
+            </div>
+
+            <Link
+              href="/work/nook-hostel-pg-platform"
+              className="block focus:outline-none"
+              aria-label="Read Nook case study"
+            >
+              <NookCardPreview />
+            </Link>
+          </div>
         </Reveal>
       </section>
 
