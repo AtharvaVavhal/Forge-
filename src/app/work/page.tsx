@@ -95,12 +95,12 @@ export default function WorkPage() {
                   <HoverArrow />
                 </Link>
                 <a
-                  href="https://usenook.in"
+                  href="https://trynook.in"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-display inline-flex items-center gap-1.5 text-xs font-semibold text-steel transition-colors hover:text-[#7657F6]"
                 >
-                  usenook.in
+                  trynook.in
                   <span aria-hidden>↗</span>
                 </a>
               </div>

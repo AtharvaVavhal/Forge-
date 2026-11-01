@@ -12,7 +12,7 @@ export default function NookCardPreview() {
         </div>
         <div className="flex items-center gap-2">
           <span className="mono text-[11px] uppercase tracking-[0.16em] text-white/50">
-            usenook.in
+            trynook.in
           </span>
         </div>
         <span className="mono inline-flex items-center gap-1.5 rounded-full bg-[#7657F6]/20 px-2 py-0.5 text-[10px] font-medium text-[#A58FFF]">

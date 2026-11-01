@@ -29,12 +29,12 @@ export default function NookMasthead() {
           </div>
 
           <a
-            href="https://usenook.in"
+            href="https://trynook.in"
             target="_blank"
             rel="noopener noreferrer"
             className="mono inline-flex items-center gap-1.5 rounded-lg border border-paper/20 px-3 py-1 text-xs text-paper/80 transition-colors hover:border-[#7657F6] hover:text-[#C4B5FD]"
           >
-            <span>usenook.in</span>
+            <span>trynook.in</span>
             <span aria-hidden>↗</span>
           </a>
         </div>
@@ -103,7 +103,7 @@ export default function NookMasthead() {
                 Domain
               </dt>
               <dd className="mt-1.5 text-sm font-semibold text-paper">
-                usenook.in
+                trynook.in
               </dd>
             </div>
           </dl>

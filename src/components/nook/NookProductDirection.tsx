@@ -43,19 +43,19 @@ export default function NookProductDirection() {
                 Official Product Domain
               </p>
               <h3 className="mt-1 font-display text-xl font-bold text-paper">
-                usenook.in
+                trynook.in
               </h3>
               <p className="mt-1 text-sm text-paper/70">
                 Official web presence and future tenant onboarding portal for Nook.
               </p>
             </div>
             <a
-              href="https://usenook.in"
+              href="https://trynook.in"
               target="_blank"
               rel="noopener noreferrer"
               className="mono inline-flex shrink-0 items-center gap-2 rounded-full border border-[#7657F6] bg-[#7657F6] px-6 py-3 text-xs font-semibold text-white transition-all hover:bg-[#876BF8]"
             >
-              <span>Visit usenook.in</span>
+              <span>Visit trynook.in</span>
               <span aria-hidden>↗</span>
             </a>
           </div>
