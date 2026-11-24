@@ -44,7 +44,7 @@ export const team: TeamMember[] = [
   },
   {
     name: "Swapnil Pawar",
-    role: "Full-Stack Engineer",
+    role: "Managing Head",
     education: "B.Tech. Computer Engineering (Software Engineering)",
     institution: "Vishwakarma Institute of Technology, Pune",
     focus: "Frontend · Backend · Engineering",
