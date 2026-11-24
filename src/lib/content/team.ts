@@ -42,4 +42,11 @@ export const team: TeamMember[] = [
     institution: "Vishwakarma Institute of Technology, Pune",
     focus: "Product · UI/UX · Frontend",
   },
+  {
+    name: "Swapnil Pawar",
+    role: "Full-Stack Engineer",
+    education: "B.Tech. Computer Engineering (Software Engineering)",
+    institution: "Vishwakarma Institute of Technology, Pune",
+    focus: "Frontend · Backend · Engineering",
+  },
 ];
