@@ -6,6 +6,7 @@ const routes = [
   "/work",
   "/work/gym-retention-platform",
   "/work/nook-hostel-pg-platform",
+  "/work/kisan-mitra",
   "/services",
   "/about",
   "/pricing",
