@@ -49,4 +49,11 @@ export const team: TeamMember[] = [
     institution: "Vishwakarma Institute of Technology, Pune",
     focus: "Frontend · Backend · Engineering",
   },
+  {
+    name: "Raj Salunkhe",
+    role: "Full-Stack Engineer",
+    education: "B.Tech. Computer Engineering (Data Science)",
+    institution: "Vishwakarma Institute of Technology, Pune",
+    focus: "Frontend · Backend · Engineering",
+  },
 ];
