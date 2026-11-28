@@ -192,12 +192,6 @@ export default function Team() {
                   tabIndex={isVisible ? 0 : -1}
                   onKeyDown={(event) => handleCardKeyDown(event, index)}
                   onClick={(event) => {
-                    if (
-                      event.detail !== 0 &&
-                      window.matchMedia("(pointer: coarse)").matches
-                    ) {
-                      return;
-                    }
                     if (!isActive) {
                       selectMember(index);
                     } else {
